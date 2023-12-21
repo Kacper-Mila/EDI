@@ -43,7 +43,7 @@ function getData() {
 
 /**
  * Get data from the mock file
- * @description Get the mock data if the API call fails, becasue e.g. we run out of requests avaible
+ * @description Get the mock data if the API call fails, becasue e.g. we run out of requests available
  */
 function getMockData(resolve, reject) {
   fetch(mockUrl)
