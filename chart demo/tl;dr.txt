@@ -1,0 +1,5 @@
+Fetches data from our API, and passes them as both charts' data
+  If it recieves an error, it fetches data from "some_schematic.json" file
+  SO HAVE IT IN THE SAME FOLDER AS "index.html" ITSELF
+
+You can also see it in here: https://kamilkadluczka.github.io/
