@@ -28,33 +28,17 @@
     <a href="index.html">
         <button class="btn btn-primary">Button to the main page</button>
     </a>
-
-    <p>example chart</p>
-    <div>
-        <canvas id="myChart"></canvas>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8" style="height: 318px;">
+                <canvas id="First_Chart_id"></canvas>
+            </div>
+            <div class="col-md-4" style="height: 318px;">
+                <canvas id="Second_Chart_id"></canvas>
+            </div>
+        </div>
     </div>
-    <script>
-        const ctx = document.getElementById('myChart');
-
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
+    <script src="/js/charts.js"></script>
 </body>
 
 </html>
