@@ -58,7 +58,7 @@
                                                     -->
             <select id="dropdown_list" onchange="filterData()">
                 <!-- First one left empty, cause the changes trigger upon CHANGING THE OPTION -->
-                <option value=""></option> 
+                <!-- <option value=""></option>  -->
                 <option value="everything">Everything</option>
                 <option value="TV">TVs</option>
                 <option value="Headphones">Headphones</option>
@@ -84,6 +84,7 @@
                 </tr>
             </thead>
             <tbody>
+                
                 <!--
                     HERE is where the filtered data shall be stored.
                     Like, in browser's memory or something.
@@ -143,7 +144,7 @@
                 // NOTE: Every time we select a filter, an API request is being sent. EVERY. TIME.
                 //       And no, as far as I know, it isn't possible to integrate the API data into the fetch code, or
                 //       overwrite the local JSON file. I tried.
-                //
+                //divs
                 fetch(backupJSON)
                 .then(response => response.json())
                 .then(data => {
@@ -167,6 +168,7 @@
 
 
 // ------------------------------------------ Using fetch() to get the data from the JSON file ------------------------------------------ //
+        
         // This creates constants variables, one for actual API, and other as backup
         const apiURL = 'https://my.api.mockaroo.com/some_schematic.json?key=d7234cf0'
         const backupJSON = 'some_schematic.json'
@@ -178,6 +180,9 @@
         fetch(apiURL)
             .then(response => response.json())
             .then(jsonData => {
+                // THIS renders the table with EVERYTHING
+                renderTable(jsonData)
+                
 
                 // This creates all STOCK variables
                 let TV_stock = 0;
