@@ -334,6 +334,8 @@
                 fetch(backupJSON)
                     .then(response => response.json())
                     .then(jsonData => {
+                        // THIS renders the table with EVERYTHING
+                        renderTable(jsonData)
 
                     let TV_stock = 0;
                     let headphones_stock = 0;
