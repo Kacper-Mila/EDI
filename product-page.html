@@ -24,11 +24,38 @@
 </head>
 
 <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-xl">
+          <a class="navbar-brand" href="/index.html"><img src="/assets/img/EDIS_logo.png" height="40px"></a>
+          
+          <div class="display-flex justify-content-end">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item lead">
+                <a class="nav-link n-item text-warning" href="/index.html">HOME</a>
+              </li>
+              <li class="nav-item lead">
+                <a class="nav-link n-item text-warning" href="/product-page.html">OFFER</a>
+              </li>
+              <li class="nav-item lead">
+                <a class="nav-link n-item text-warning" href="/about.html">ABOUT</a>
+              </li>
+            </ul>
+          </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          </div>
+        </div>
+      </nav>
+
+    <!-- charts -->
     <script src="js/main.js" type="application/javascript"></script>
     <a href="index.html">
         <button class="btn btn-primary">Button to the main page</button>
     </a>
-    <div class="container">
+    <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-8" style="height: 318px;">
                 <canvas id="First_Chart_id"></canvas>
@@ -39,6 +66,14 @@
         </div>
     </div>
     <script src="/js/charts.js"></script>
+
+    <!-- footer -->
+    <div class="container-fluid bg-body-tertiary py-3" data-bs-theme="dark">
+        <div class="container-xxl">
+        <h3 class="text-warning">Legal info</h3>
+        <h2 class="h6 text-secondary">some legal stuff</h2>
+      </div>
+    </div>
 </body>
 
 </html>

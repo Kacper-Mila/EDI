@@ -40,8 +40,22 @@ body {
     height: 600px;
 }
 
+.n-item:hover {
+    color: white !important;
+    text-decoration: underline;
+    text-decoration-color: #EFB60A;
+}
+
 .c-image {
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.7);
+    filter: brightness(0.6);
+}
+
+.b-img{
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(/assets/img/davide-boscolo-gz9njd0zYbQ-unsplash.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 600px;
+    backdrop-filter: brightness(0.2);
 }
