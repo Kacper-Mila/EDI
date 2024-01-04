@@ -3,3 +3,16 @@ Fetches data from our API, and passes them as both charts' data
   SO HAVE IT IN THE SAME FOLDER AS "index.html" ITSELF
 
 You can also see it in here: https://kamilkadluczka.github.io/
+
+Note about the table:
+  - An API request is being sent EVERY TIME we change filter option.
+  - There is a backup table, that reads data off the JSON file.
+  - Problem: It loads first, and after 1-2 sec delay it is overwritten
+  with whatever data the API sent.
+  - I added markers around the section that has the backup. We CAN remove it, but
+  at a risk of running out of requests for our API. The table would show nothing, it that were so.
+
+  - I tried to integrate it into the fetch() thing, but it refuses to work
+  no matter what I do.
+  - I also tried to download the data from the API and overwrite the "some_schematic.json" file
+  but it also didn't work.
