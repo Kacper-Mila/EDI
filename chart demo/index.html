@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Charts.js</title>
+    <!-- Table Styling -->
+    <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+          margin-top: 20px;
+        }
+    
+        th, td {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+      </style>
+    <!-- 
+        Bootstrap
+    -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- 
+        Chart.js
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    
+    <!--
+        This creates a div, in which there is a bootstrap row div, inside of which are two(2) bootstrap col divs.
+        All that with some styling to make this sheet look presentable.
+    -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8" style="height: 318px;">
+                <canvas id="First_Chart_id"></canvas>
+            </div>
+            <div class="col-md-4" style="height: 318px;">
+                <canvas id="Second_Chart_id"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+    <!--
+        This div is for the filtering section and data table. It only need a singular row.
+    -->
+    <div class="container">
+        <div class="row">
+            <!-- This creates a dropdown menu for filtering options -->
+            <label for="dropdown_list">Look for:</label>
+                                                <!-- THIS is a function that is triggered upon upon changing the filter option.
+                                                     Function itself is in <script> below.
+                                                     NOTE: It is being sent EVERY TIME we change the filter
+                                                    -->
+            <select id="dropdown_list" onchange="filterData()">
+                <!-- First one left empty, cause the changes trigger upon CHANGING THE OPTION -->
+                <!-- <option value=""></option>  -->
+                <option value="everything">Everything</option>
+                <option value="TV">TVs</option>
+                <option value="Headphones">Headphones</option>
+                <option value="Laptop">Laptops</option>
+                <option value="Tablet">Tablets</option>
+                <option value="Smartphone">Smartphones</option>
+                <option value="Camera">Cameras</option>
+                <!-- More options can be added here -->
+                <!-- But they ain't gonna work, unless we add more categories to the API -->
+            </select>
+
+            <!-- Table to display filtered items -->
+            <table id="table">
+            <thead>
+                <tr>
+                <th>ID</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity in Stock</th>
+                <th>Searches</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <!--
+                    HERE is where the filtered data shall be stored.
+                    Like, in browser's memory or something.
+                 -->
+            </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <!-- Chart.js -->
+    <script>
+        // Function to render the table with filtered data
+        function renderTable(filteredData) {
+            const tableBody = document.getElementById('table').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = '';
+
+            filteredData.forEach(item => {
+            const row = tableBody.insertRow();
+
+            // Populate each cell with the item's property
+            for (const key in item) {
+                const cell = row.insertCell();
+                cell.innerText = item[key];
+            }
+            });
+        }
+
+        // This function filters data based on the selected option in the dropdown menu
+        function filterData() {
+            const filterOption = document.getElementById('dropdown_list').value;
+
+            fetch(apiURL)
+            .then(response => response.json())
+            .then(data => {
+                let filteredData = [];
+
+                if (filterOption === 'everything') {
+                // This shows all data if "Everything" is selected
+                filteredData = data;
+                } else {
+                // Filter data based on the selected category
+                filteredData = data.filter(item => item.category === filterOption);
+                }
+
+                // Render the table with filtered data
+                renderTable(filteredData);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+                //
+                // The section below CAN be deleted, that way, the table will show data with 1-2 sec delay
+                // Otherwise, it defaults to "some_schematic.json", and after those 1-2 seconds, overwrites it
+                // with whatever API sent.
+                // NOTE: Every time we select a filter, an API request is being sent. EVERY. TIME.
+                //       And no, as far as I know, it isn't possible to integrate the API data into the fetch code, or
+                //       overwrite the local JSON file. I tried.
+                //divs
+                fetch(backupJSON)
+                .then(response => response.json())
+                .then(data => {
+                    let filteredData = [];
+
+                    if (filterOption === 'everything') {
+                    // Show all data if "All" is selected
+                    filteredData = data;
+                    } else {
+                    // Filter data based on the selected category
+                    filteredData = data.filter(item => item.category === filterOption);
+                    }
+
+                    // Render the table with filtered data
+                    renderTable(filteredData);
+                })
+                //
+                //
+                //
+        }
+
+
+// ------------------------------------------ Using fetch() to get the data from the JSON file ------------------------------------------ //
+        
+        // This creates constants variables, one for actual API, and other as backup
+        const apiURL = 'https://my.api.mockaroo.com/some_schematic.json?key=d7234cf0'
+        const backupJSON = 'some_schematic.json'
+
+        // We need to put all charts into this ".then(jsonData => {" thing for them to work.
+        // Probably a scope (read as: skill) issue.
+        //
+        // Note: JSON file needs to be named EXACTLY like below, no matter what yo mama tells you
+        fetch(apiURL)
+            .then(response => response.json())
+            .then(jsonData => {
+                // THIS renders the table with EVERYTHING
+                renderTable(jsonData)
+                
+
+                // This creates all STOCK variables
+                let TV_stock = 0;
+                let headphones_stock = 0;
+                let laptop_stock = 0;
+                let tablet_stock = 0;
+                let smartphone_stock = 0;
+                let camera_stock = 0;
+
+                // This creates all LOOKUPS variables
+                let TV_lookups = 0;
+                let headphones_lookups = 0;
+                let laptop_lookups = 0;
+                let tablet_lookups = 0;
+                let smartphone_lookups = 0;
+                let camera_lookups = 0;
+
+                // AND THIS... made me cry xD
+                // Fo real tho,
+                // This iterates through each object in the JSON data
+                jsonData.forEach(item => {
+                // This checks if the category is "TV"
+                if (item.category === 'TV') {
+                    // If so, then it adds the "q_in_stock" value to "TV_stock" variable
+                    TV_stock += item.q_in_stock;
+                // If there are no matches, it checks whether the "category" matches any of the listed below
+                } else if (item.category === 'Headphones') {
+                    headphones_stock += item.q_in_stock;
+                } else if (item.category === 'Laptop') {
+                    laptop_stock += item.q_in_stock;
+                } else if (item.category === 'Tablet') {
+                    tablet_stock += item.q_in_stock;
+                } else if (item.category === 'Smartphone') {
+                    smartphone_stock += item.q_in_stock;
+                } else if (item.category === 'Camera') {
+                    camera_stock += item.q_in_stock;
+                };
+                // Same s***, except for lookup variables
+                if (item.category === 'TV') {
+                    TV_lookups += item.lookups;
+                } else if (item.category === 'Headphones') {
+                    headphones_lookups += item.lookups;
+                } else if (item.category === 'Laptop') {
+                    laptop_lookups += item.lookups;
+                } else if (item.category === 'Tablet') {
+                    tablet_lookups += item.lookups;
+                } else if (item.category === 'Smartphone') {
+                    smartphone_lookups += item.lookups;
+                } else if (item.category === 'Camera') {
+                    camera_lookups += item.lookups;
+                };
+                });
+
+                // Output to browser console for testing 
+                console.log('Total TV Stock:', TV_stock);
+                console.log('Total Headphones Stock:', headphones_stock);
+                console.log('Total Laptop Stock:', laptop_stock);
+                console.log('Total Tablet Stock:', tablet_stock);
+                console.log('Total Smartphone Stock:', smartphone_stock);
+                console.log('Total Camera Stock:', camera_stock);
+                console.log() // Chill, it's for readability. TRUST ME
+                console.log('Total TV lookups:', TV_lookups);
+                console.log('Total Headphones lookups:', headphones_lookups);
+                console.log('Total Laptop lookups:', laptop_lookups);
+                console.log('Total Tablet lookups:', tablet_lookups);
+                console.log('Total Smartphone lookups:', smartphone_lookups);
+                console.log('Total Camera lookups:', camera_lookups);
+
+//-------------------------------------------------------- FIRST CHART BELOW HERE --------------------------------------------------------//
+                // Staging Area for the chart
+                // We need Data, and Options
+                // So we create both variables as listed
+
+                // Data
+                var barChartData = {
+                    labels: ['TV', 'Headphones', 'Laptop', 'Tablet', 'Smartphone', 'Camera'],
+                    datasets: [{
+                        label: "Lookups",
+                        // These need to be numbers, and since we have variables WITH said numbers, we put them here
+                        data: [TV_lookups, headphones_lookups, laptop_lookups, tablet_lookups, smartphone_lookups, camera_lookups],
+                        backgroundColor: [
+                                        '#ffa1b5',
+                                        '#c2a3ff',
+                                        '#86c7f3',
+                                        '#93d9d9',
+                                        '#ffe29a',
+                                        '#ffc58c',
+                                        ],
+                    },]
+                };
+
+                // Options
+                var barChartOptions = {
+                    // Scales are something like a background graph
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                };
+
+                // This creates the damned thing
+                // Here, we need context variable, which we get here
+                var barChartCtx = document.getElementById("First_Chart_id").getContext('2d');
+                // And this creates the actual chart (hopefully)
+                var barChart = new Chart(barChartCtx, {
+                    type: 'bar', // This can be 'bar', 'bubble', 'doughnut', 'pie', 'line' etc.
+                    data: barChartData, // Data is here
+                    options: barChartOptions // Options are here
+                });
+//-------------------------------------------------------- FIRST CHART ABOVE HERE --------------------------------------------------------//
+//-------------------------------------------------------- SECOND CHART BELOW HERE -------------------------------------------------------//
+                // Staging Area again
+                // Data
+                var barChartData = {
+                    labels: ['TV', 'Headphones', 'Laptop', 'Tablet', 'Smartphone', 'Camera'],
+                    datasets: [{
+                        label: 'Doughnut Chart text',
+                        data: [TV_stock, headphones_stock, laptop_stock, tablet_stock, smartphone_stock, camera_stock],
+                        backgroundColor: [
+                                        '#ffa1b5',
+                                        '#c2a3ff',
+                                        '#86c7f3',
+                                        '#93d9d9',
+                                        '#ffe29a',
+                                        '#ffc58c',
+                                        ],
+                    }]
+                };
+
+                // Options
+                var doughnutChartOptions = {
+                    // Don't even bother with this
+                    // Abomination doesn't work for whatever reason anyway
+                };
+
+                // Create the abomination
+                var barCtx = document.getElementById("Second_Chart_id").getContext('2d');
+                var barChart = new Chart(barCtx, {
+                    type: 'doughnut',
+                    data: barChartData,
+                    options: doughnutChartOptions
+                });
+            })
+            // Here is the Backup request.
+            // If the first one returns an error, a "backup API" will be used. That's our "some_schematic.json" file.
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                fetch(backupJSON)
+                    .then(response => response.json())
+                    .then(jsonData => {
+                        // THIS renders the table with EVERYTHING
+                        renderTable(jsonData)
+
+                    let TV_stock = 0;
+                    let headphones_stock = 0;
+                    let laptop_stock = 0;
+                    let tablet_stock = 0;
+                    let smartphone_stock = 0;
+                    let camera_stock = 0;
+
+
+                    let TV_lookups = 0;
+                    let headphones_lookups = 0;
+                    let laptop_lookups = 0;
+                    let tablet_lookups = 0;
+                    let smartphone_lookups = 0;
+                    let camera_lookups = 0;
+
+                    jsonData.forEach(item => {
+                    if (item.category === 'TV') {
+                        TV_stock += item.q_in_stock;
+                    } else if (item.category === 'Headphones') {
+                        headphones_stock += item.q_in_stock;
+                    } else if (item.category === 'Laptop') {
+                        laptop_stock += item.q_in_stock;
+                    } else if (item.category === 'Tablet') {
+                        tablet_stock += item.q_in_stock;
+                    } else if (item.category === 'Smartphone') {
+                        smartphone_stock += item.q_in_stock;
+                    } else if (item.category === 'Camera') {
+                        camera_stock += item.q_in_stock;
+                    };
+
+                    if (item.category === 'TV') {
+                        TV_lookups += item.lookups;
+                    } else if (item.category === 'Headphones') {
+                        headphones_lookups += item.lookups;
+                    } else if (item.category === 'Laptop') {
+                        laptop_lookups += item.lookups;
+                    } else if (item.category === 'Tablet') {
+                        tablet_lookups += item.lookups;
+                    } else if (item.category === 'Smartphone') {
+                        smartphone_lookups += item.lookups;
+                    } else if (item.category === 'Camera') {
+                        camera_lookups += item.lookups;
+                    };
+                    });
+
+
+                    console.log('Total TV Stock:', TV_stock);
+                    console.log('Total Headphones Stock:', headphones_stock);
+                    console.log('Total Laptop Stock:', laptop_stock);
+                    console.log('Total Tablet Stock:', tablet_stock);
+                    console.log('Total Smartphone Stock:', smartphone_stock);
+                    console.log('Total Camera Stock:', camera_stock);
+                    console.log()
+                    console.log('Total TV lookups:', TV_lookups);
+                    console.log('Total Headphones lookups:', headphones_lookups);
+                    console.log('Total Laptop lookups:', laptop_lookups);
+                    console.log('Total Tablet lookups:', tablet_lookups);
+                    console.log('Total Smartphone lookups:', smartphone_lookups);
+                    console.log('Total Camera lookups:', camera_lookups);
+
+    //------------------------------------------------------ FIRST CHART BELOW HERE ------------------------------------------------------//
+                    var barChartData = {
+                        labels: ['TV', 'Headphones', 'Laptop', 'Tablet', 'Smartphone', 'Camera'],
+                        datasets: [{
+                            label: "Lookups",
+                            data: [TV_lookups, headphones_lookups, laptop_lookups, tablet_lookups, smartphone_lookups, camera_lookups],
+                            backgroundColor: [
+                                            '#ffa1b5',
+                                            '#c2a3ff',
+                                            '#86c7f3',
+                                            '#93d9d9',
+                                            '#ffe29a',
+                                            '#ffc58c',
+                                            ],
+                        },]
+                    };
+
+                    // Options
+                    var barChartOptions = {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    };
+
+                    var barChartCtx = document.getElementById("First_Chart_id").getContext('2d');
+                    var barChart = new Chart(barChartCtx, {
+                        type: 'bar',
+                        data: barChartData, // Data is here
+                        options: barChartOptions // Options are here
+                    });
+    //------------------------------------------------------ FIRST CHART ABOVE HERE ------------------------------------------------------//
+    //------------------------------------------------------ SECOND CHART BELOW HERE -----------------------------------------------------//
+                    // Staging Area again
+                    // Data
+                    var barChartData = {
+                        labels: ['TV', 'Headphones', 'Laptop', 'Tablet', 'Smartphone', 'Camera'],
+                        datasets: [{
+                            label: 'Doughnut Chart text',
+                            data: [TV_stock, headphones_stock, laptop_stock, tablet_stock, smartphone_stock, camera_stock],
+                            backgroundColor: [
+                                            '#ffa1b5',
+                                            '#c2a3ff',
+                                            '#86c7f3',
+                                            '#93d9d9',
+                                            '#ffe29a',
+                                            '#ffc58c',
+                                            ],
+                        }]
+                    };
+
+                    // Options
+                    var barChartOptions = {
+                    };
+
+                    // Create the abomination
+                    var barCtx = document.getElementById("Second_Chart_id").getContext('2d');
+                    var barChart = new Chart(barCtx, {
+                        type: 'doughnut',
+                        data: barChartData,
+                        options: barChartOptions
+                });
+            })
+            });
+//-------------------------------------------------------- SECOND CHART ABOVE HERE -------------------------------------------------------//
+
+    </script>
+  </body>
+</html>

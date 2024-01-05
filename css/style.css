@@ -35,3 +35,39 @@ body {
     padding: 0;
     overflow-x: hidden;
 }
+
+.carousel-item {
+    height: 600px;
+}
+
+.n-item:hover {
+    color: white !important;
+    text-decoration: underline;
+    text-decoration-color: #EFB60A;
+}
+
+.c-image {
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+
+.b-img{
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(davide-boscolo-gz9njd0zYbQ-unsplash.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 600px;
+    backdrop-filter: brightness(0.2);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }

@@ -2,48 +2,147 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDIS - Electronic Data interchange Shop</title>
-    <!-- main CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"
-        async></script>
-    </head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDIS - Electronic Data interchange Shop</title>
+  <!-- favicon -->
+  <link rel="shortcut icon" href="assets/img/favico.png" type="image/x-icon">
+
+  <!-- main CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous" async></script>
+  <!-- JQuerry -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </head>
     
-    <body>
-    <!-- JQuerry -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    
-    <!-- Thats only that you cold see what the bootstrap does -->
-    <!-- every class here is from Bootstrap -->
-    <!-- m/y - margin/padding -->
-    <!-- my - defines the margin for the Y axis -->
-    <!-- py - does the same but for padding -->
-    <div class="container my-2 py-3 border border-2 border-primary flex-column text-center bg-dark">
-        <h1 class="text-light">Welcome to EDIS!</h1>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+      <div class="container-xl">
+        <a class="navbar-brand" href="./index.html"><img src="./assets/img/EDIS_logo.png" height="40px"></a>
+        
+        <div class="display-flex justify-content-end">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item lead">
+              <a class="nav-link n-item text-warning" href="./index.html">HOME</a>
+            </li>
+            <li class="nav-item lead">
+              <a class="nav-link n-item text-warning" href="./product-page.html">OFFER</a>
+            </li>
+            <li class="nav-item lead">
+              <a class="nav-link n-item text-warning" href="./about.html">ABOUT</a>
+            </li>
+          </ul>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-xxl">
+      <!-- hero section -->
+      <div id="carouselExampleCaptions" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="./assets/img/christopher-gower-_aXa21cf7rY-unsplash.jpg" class="d-block w-100 c-image" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>World-class seller of electronic goods with the best prices!</h5>
+              <p class="my-1">The data shows that YOU can trust US</p>
+              <a href="./product-page.html">
+                <button class="btn btn-lg btn-outline-warning my-3">Learn more</button>
+              </a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./assets/img/davide-boscolo-gz9njd0zYbQ-unsplash.jpg" class="d-block w-100 c-image" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>The best of the best!</h5>
+              <p>We are the best place to get your gadgets in Europe for a low price</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./assets/img/dai-ogxlyCA1BQc-unsplash.jpg" class="d-block w-100 c-image" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Infinite choice!</h5>
+              <p>Thanks to our multiple international partners we are able to provide the best products yuo can think of</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <div class="container-fluid py-5 row justify-content-evenly">
+
+        <h1 class="text-center my-5 display-1">Popular</h1>
+
+        <div class="card" style="width: 18rem;">
+          <img src="./assets/img/headphones.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Soundcore by Anker Life Q30 Hybrid Active Noise Cancelling Headphones</h5>
+            <p class="card-text">with Multiple Modes, Hi-Res Sound, 40H Playtime, Clear Calls, Fast Charge, Soft Earcups, Bluetooth Headphones.</p>
+            <a href="#" class="btn btn-warning">Get it for $79.99</a>
+          </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+          <img src="./assets/img/laptop.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Acer Aspire 5 A515 Business Laptop</h5>
+            <p class="card-text">15.6" FHD Display, Intel Core i5-1135G7, NVIDIA GeForce MX450, 40GB RAM, 1TB SSD, Webcam, Backlit KB, HDMI, RJ-45, Wi-Fi 6, Windows 11 Pro, Silver.</p>
+            <a href="#" class="btn btn-warning">Get it for $549.00</a>
+          </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+          <img src="./assets/img/smartphone .jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">SAMSUNG Galaxy A23 5G A Series Cell Phone</h5>
+            <p class="card-text">Factory Unlocked Android Smartphone, 64GB, Wide Lens Camera, 6.6 Infinite Display Screen, Long Battery Life, US Version, 2022, Black.</p>
+            <a href="#" class="btn btn-warning">Get it for $310.86</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-xxl p-5">
+        <div class="container px-4 py-5">
+          <div class="b-img rounded display-flex p-5">
+            <h1 class="display-1 text-light">About us</h1>
+            <ul class="text-light h2">
+              <li>Based in Europe</li>
+              <li>Environmentally friendly</li>
+              <li>Providing our customers with highest quiality electronics sice 2023</li>
+            </ul>
+            <a href="./about.html" class="btn btn-lg btn-warning my-5">It's US!</a>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <!-- Thats how the data data can be taken using JQuerry -->
-    <!-- But take it to a seperate js file! -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $.ajax({
-                url: "http://localhost:8080/edis/api/products",
-                type: "GET",
-                dataType: "json",
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
-                }
-            });
-        });
-    </script>
+
+    <!-- footer -->
+    <div class="container-fluid bg-body-tertiary py-3" data-bs-theme="dark">
+      <div class="container-xxl">
+      <h3 class="text-warning">Disclaimer</h3>
+      <h2 class="h6 text-secondary">This project is for educational purposes, this is not a real storefront.<br>
+        © 2023-2024 EDIS Inc.  All rights reserved.</h2>
+    </div>
+  </div>
 </body>
 
 </html>
+
