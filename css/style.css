@@ -59,3 +59,15 @@ body {
     height: 600px;
     backdrop-filter: brightness(0.2);
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
