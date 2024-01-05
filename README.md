@@ -6,9 +6,9 @@ It's an electronic shop with various items.<br>
 The page is divided into three sections. Home, offer and about.<br>
 Most intresting is the second page where you can see a great combination of diffrent libraries to create an aestheticly pleasing data view.<br>
 #### What we used?
-- Bootstrap
+- Bootstrap<br>
 A quick and easy to use CSS framework
-- JQuerry 
+- JQuerry<br>
 Lightweight Java Script framework
-- Mockarro
+- Mockarro<br>
 Easy to use API for mocking data requests 
