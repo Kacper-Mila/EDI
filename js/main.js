@@ -20,25 +20,28 @@ let data = [];
 // 3. Resolve or reject the promise
 // 4. Use the resolved value
 function getData() {
-  return new Promise((resolve, reject) => {
-    if (sessionStorage.getItem("cachedData") !== null) {
-      console.log("Using cached data");
-      resolve(JSON.parse(sessionStorage.getItem("cachedData")));
-    } else {
-      $.ajax({
-        url: apiUrl,
-        method: "GET",
-        success: function (response) {
-          console.log("Fetching data");
-          sessionStorage.setItem("cachedData", JSON.stringify(response));
-          resolve(response);
-        },
-        error: function (xhr, status, error) {
-          getMockData(resolve, reject);
-        },
-      });
-    }
-  });
+    return new Promise((resolve, reject) => {
+        if (sessionStorage.getItem("cachedData") !== null) {
+            console.log("Using cached data");
+            resolve(JSON.parse(sessionStorage.getItem("cachedData")));
+        } else {
+            $.ajax({
+                url: apiUrl,
+                method: "GET",
+                success: function (response) {
+                    console.log("Fetching data");
+                    sessionStorage.setItem(
+                        "cachedData",
+                        JSON.stringify(response)
+                    );
+                    resolve(response);
+                },
+                error: function (xhr, status, error) {
+                    getMockData(resolve, reject);
+                },
+            });
+        }
+    });
 }
 
 /**
@@ -46,14 +49,14 @@ function getData() {
  * @description Get the mock data if the API call fails, becasue e.g. we run out of requests available
  */
 function getMockData(resolve, reject) {
-  fetch(mockUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Fetching mock data");
-      resolve(data);
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-      reject(error);
-    });
+    fetch(mockUrl)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("Fetching mock data");
+            resolve(data);
+        })
+        .catch((error) => {
+            console.error("Error fetching data:", error);
+            reject(error);
+        });
 }
