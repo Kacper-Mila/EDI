@@ -57,13 +57,3 @@ function getMockData(resolve, reject) {
       reject(error);
     });
 }
-
-// Use the data outside the AJAX call
-getData()
-  .then((response) => {
-    data = response;
-    console.log(data);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
