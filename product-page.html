@@ -66,6 +66,71 @@
         </div>
     </div>
     <script src="./js/charts.js"></script>
+    <!-- table -->
+    <!--
+        This creates a div, in which there is a bootstrap row div, inside of which are two(2) bootstrap col divs.
+        All that with some styling to make this sheet look presentable.
+    -->
+    <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-md-8" style="height: 318px;">
+              <canvas id="First_Chart_id"></canvas>
+          </div>
+          <div class="col-md-4" style="height: 318px;">
+              <canvas id="Second_Chart_id"></canvas>
+          </div>
+      </div>
+  </div>
+
+
+  <!--
+      This div is for the filtering section and data table. It only need a singular row.
+  -->
+  <div class="container">
+      <div class="row">
+          <!-- This creates a dropdown menu for filtering options -->
+          <label for="dropdown_list">Look for:</label>
+                                              <!-- THIS is a function that is triggered upon upon changing the filter option.
+                                                   Function itself is in <script> below.
+                                                   NOTE: It is being sent EVERY TIME we change the filter
+                                                  -->
+          <select id="dropdown_list" onchange="filterData()">
+              <!-- First one left empty, cause the changes trigger upon CHANGING THE OPTION -->
+              <!-- <option value=""></option>  -->
+              <option value="everything">Everything</option>
+              <option value="TV">TVs</option>
+              <option value="Headphones">Headphones</option>
+              <option value="Laptop">Laptops</option>
+              <option value="Tablet">Tablets</option>
+              <option value="Smartphone">Smartphones</option>
+              <option value="Camera">Cameras</option>
+              <!-- More options can be added here -->
+              <!-- But they ain't gonna work, unless we add more categories to the API -->
+          </select>
+
+          <!-- Table to display filtered items -->
+          <table id="table">
+          <thead>
+              <tr>
+              <th>ID</th>
+              <th>Brand</th>
+              <th>Category</th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Quantity in Stock</th>
+              <th>Searches</th>
+              </tr>
+          </thead>
+          <tbody>
+              
+              <!--
+                  HERE is where the filtered data shall be stored.
+                  Like, in browser's memory or something.
+               -->
+          </tbody>
+          </table>
+      </div>
+  </div>
 
     <!-- footer -->
     <div class="container-fluid bg-body-tertiary py-3" data-bs-theme="dark">
