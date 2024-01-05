@@ -52,8 +52,8 @@ body {
     filter: brightness(0.6);
 }
 
-.b-img{
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(davide-boscolo-gz9njd0zYbQ-unsplash.jpg);
+.b-img {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(davide-boscolo-gz9njd0zYbQ-unsplash.jpg);
     background-position: center;
     background-size: cover;
     height: 600px;
@@ -64,10 +64,11 @@ table {
     border-collapse: collapse;
     width: 100%;
     margin-top: 20px;
-  }
+}
 
-  th, td {
+th,
+td {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
-  }
+}
