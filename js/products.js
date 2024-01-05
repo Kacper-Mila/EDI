@@ -2,20 +2,22 @@
  * This function renders the table with the data
  */
 function renderTable(filteredData) {
-    const tableBody = document
-        .getElementById("table")
-        .getElementsByTagName("tbody")[0];
-    tableBody.innerHTML = "";
+    setTimeout(() => {
+        const tableBody = document
+            .getElementById("table")
+            .getElementsByTagName("tbody")[0];
+        tableBody.innerHTML = "";
 
-    filteredData.forEach((item) => {
-        const row = tableBody.insertRow();
+        filteredData.forEach((item) => {
+            const row = tableBody.insertRow();
 
-        // Populate each cell with the item's property
-        for (const key in item) {
-            const cell = row.insertCell();
-            cell.innerText = item[key];
-        }
-    });
+            // Populate each cell with the item's property
+            for (const key in item) {
+                const cell = row.insertCell();
+                cell.innerText = item[key];
+            }
+        });
+    }, 500);
 }
 
 /**
