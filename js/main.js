@@ -1,7 +1,7 @@
 const apiUrl = "https://my.api.mockaroo.com/some_schematic.json?key=d7234cf0";
 const mockUrl = "../assets/data/some_schematic.json";
 // use this to manipulate the data from the API
-let data = [];
+let productData = [];
 
 /**
  * Get data from the API
@@ -60,3 +60,9 @@ function getMockData(resolve, reject) {
             reject(error);
         });
 }
+
+getData().then((data) => {
+  productData = data;
+}).catch((error) => {
+    console.error("Error fetching data:", error);
+});
