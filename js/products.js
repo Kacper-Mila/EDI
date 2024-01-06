@@ -65,19 +65,19 @@ function renderTable(filteredData) {
 function getItemImage(category) {
     switch (category) {
         case "Headphones":
-            return "../assets/img/headphones.jpg";
+            return "./assets/img/headphones.jpg";
         case "Smartphone":
             return "./assets/img/smartphone.jpg";
         case "TV":
-            return "../assets/img/tv.png";
+            return "./assets/img/tv.png";
         case "Camera":
-            return "../assets/img/camera.jpg";
+            return "./assets/img/camera.jpg";
         case "Tablet":
-            return "../assets/img/tablet.png";
+            return "./assets/img/tablet.png";
         case "Laptop":
-            return "../assets/img/laptop.jpg";
+            return "./assets/img/laptop.jpg";
         default:
-            return "../assets/img/placeholder.png";
+            return "./assets/img/placeholder.png";
     }
 }
 /**
