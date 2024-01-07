@@ -1,5 +1,5 @@
 const apiUrl = "https://my.api.mockaroo.com/some_schematic.json?key=d7234cf0";
-const mockUrl = "./assets/data/Some_schematic.json";
+const mockUrl = "./assets/data/Some_schematic.geojson";
 // use this to manipulate the data from the API
 let productData = [];
 
