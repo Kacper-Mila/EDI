@@ -2,10 +2,9 @@ const loader1 = document.getElementById("loader1");
 const loader2 = document.getElementById("loader2");
 // ------------------------------------------ Using fetch() to get the data from the JSON file ------------------------------------------ //
 
-// We need to put all charts into this ".then(jsonData => {" thing for them to work.
-// Probably a scope (read as: skill) issue.
-//
-// Note: JSON file needs to be named EXACTLY like below, no matter what yo mama tells you
+// Charts need to go into the ".then" bock of code.
+// getData() gets them the data they need to work
+
 setTimeout(() => {
 
   getData()
@@ -28,8 +27,6 @@ setTimeout(() => {
           let smartphone_lookups = 0;
           let camera_lookups = 0;
   
-          // AND THIS... made me cry xD
-          // Fo real tho,
           // This iterates through each object in the JSON data
           data.forEach((item) => {
               // This checks if the category is "TV"
@@ -48,7 +45,7 @@ setTimeout(() => {
               } else if (item.category === "Camera") {
                   camera_stock += item.q_in_stock;
               }
-              // Same s***, except for lookup variables
+              // Same stuff, except for lookup variables
               if (item.category === "TV") {
                   TV_lookups += item.lookups;
               } else if (item.category === "Headphones") {
@@ -113,7 +110,6 @@ setTimeout(() => {
               },
           };
   
-          // This creates the damned thing
           // Here, we need context variable, which we get here
           var barChartCtx = document
               .getElementById("First_Chart_id")
@@ -176,16 +172,12 @@ setTimeout(() => {
               options: barChartOptions,
           });
       })
-      // Here is the Backup request.
-      // If the first one returns an error, a "backup API" will be used. That's our "some_schematic.json" file.
       .catch((error) => {
           console.error("Error fetching data:", error);
       })
       .finally(() => {
-        // This hides the loader when the chart is loaded
           loader1.style.display = "none";
           loader2.style.display = "none";
       });
   //-------------------------------------------------------- SECOND CHART ABOVE HERE -------------------------------------------------------//
-  //-------------------------------------------------------- TABLE CHART BELOW HERE -------------------------------------------------------//
-}, 600);
+}, 500);
