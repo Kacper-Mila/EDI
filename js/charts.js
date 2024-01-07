@@ -182,9 +182,10 @@ setTimeout(() => {
           console.error("Error fetching data:", error);
       })
       .finally(() => {
+        // This hides the loader when the chart is loaded
           loader1.style.display = "none";
           loader2.style.display = "none";
       });
   //-------------------------------------------------------- SECOND CHART ABOVE HERE -------------------------------------------------------//
   //-------------------------------------------------------- TABLE CHART BELOW HERE -------------------------------------------------------//
-}, 500);
+}, 600);
